@@ -1,4 +1,38 @@
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2020/7/5 18:08:32                            */
+/*==============================================================*/
 
+
+drop table if exists address;
+
+drop table if exists coupon;
+
+drop table if exists coupon_holding;
+
+drop table if exists goods;
+
+drop table if exists goods_evaluation;
+
+drop table if exists mj;
+
+drop table if exists myuser;
+
+drop table if exists orders;
+
+drop table if exists orders_coupons;
+
+drop table if exists rider;
+
+drop table if exists rider_entry;
+
+drop table if exists shop;
+
+drop table if exists shop_order;
+
+drop table if exists sort;
+
+drop table if exists staff;
 
 /*==============================================================*/
 /* Table: address                                               */
@@ -52,7 +86,6 @@ create table goods
    goods_id             numeric(8,0) not null,
    shop_id              numeric(8,0),
    sort_id              numeric(8,0),
-   order_id             numeric(8,0),
    goods_name           varchar(50) not null,
    goods_price          numeric(8,0) not null,
    goods_youhui         numeric(8,0) not null,
@@ -112,6 +145,7 @@ create table myuser
 create table orders
 (
    order_id             numeric(8,0) not null,
+   goods_id             numeric(8,0),
    order_sum            numeric(8,0) not null,
    order_price          numeric(8,0) not null,
    order_disconut       numeric(8,0),
@@ -212,6 +246,7 @@ create table staff
    staff_id             numeric(8,0) not null,
    staff_name           varchar(30) not null,
    staff_pwd            varchar(30) not null,
+   staff_phone          varchar(20) not null,
    primary key (staff_id)
 );
 
@@ -233,9 +268,6 @@ alter table coupon_holding add constraint FK_coupon_holding3 foreign key (coupon
 alter table goods add constraint FK_Relationship_1 foreign key (sort_id)
       references sort (sort_id) on delete restrict on update restrict;
 
-alter table goods add constraint FK_Relationship_3 foreign key (order_id)
-      references orders (order_id) on delete restrict on update restrict;
-
 alter table goods add constraint FK_Relationship_5 foreign key (shop_id)
       references shop (shop_id) on delete restrict on update restrict;
 
@@ -250,6 +282,9 @@ alter table goods_evaluation add constraint FK_goods_evaluation3 foreign key (us
 
 alter table mj add constraint FK_Relationship_4 foreign key (shop_id)
       references shop (shop_id) on delete restrict on update restrict;
+
+alter table orders add constraint FK_Relationship_3 foreign key (goods_id)
+      references goods (goods_id) on delete restrict on update restrict;
 
 alter table orders_coupons add constraint FK_orders_coupons foreign key (shop_id)
       references shop (shop_id) on delete restrict on update restrict;
