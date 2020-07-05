@@ -1,11 +1,11 @@
-package cn.edu.zucc.personplan.util;
+package cn.edu.zucc.assistance.util;
 
 import java.sql.Connection;
 
 public class DBUtil {
-	private static final String jdbcUrl="jdbc:mysql://localhost:3306/booklib";
-	private static final String dbUser="root";
-	private static final String dbPwd="zucc";
+	private static final String jdbcUrl="jdbc:mysql://39.101.189.21:3306/zjz1?useUnicode=true&characterEncoding=UTF-8";
+	private static final String dbUser="sxj";
+	private static final String dbPwd="991024sxj";
 	static{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

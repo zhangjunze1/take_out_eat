@@ -1,6 +1,6 @@
 package cn.edu.zucc.assistance;
 
-import cn.edu.zucc.assistance.ui.FrmMain;
+import cn.edu.zucc.assistance.ui.FrmMainUser;;
 
 public class assistanceStarter {
 
@@ -9,7 +9,7 @@ public class assistanceStarter {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new FrmMain();
+		new FrmMainUser();
 	}
 
 }

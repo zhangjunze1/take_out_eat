@@ -1,4 +1,4 @@
-package cn.edu.zucc.personplan.util;
+package cn.edu.zucc.assistance.util;
 
 public class DbException extends BaseException {
 	public DbException(java.lang.Throwable ex){

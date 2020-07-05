@@ -1,4 +1,4 @@
-package cn.edu.zucc.personplan.util;
+package cn.edu.zucc.assistance.util;
 
 public class BusinessException extends BaseException {
 	public BusinessException(String msg){

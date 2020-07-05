@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/7/5 18:08:32                            */
+/* Created on:     2020/7/7 14:00:42                            */
 /*==============================================================*/
 
 
@@ -39,8 +39,8 @@ drop table if exists staff;
 /*==============================================================*/
 create table address
 (
-   add_id               numeric(8,0) not null,
-   user_id              numeric(8,0),
+   add_id               int not null auto_increment,
+   user_id              int,
    add_pro              varchar(20) not null,
    add_city             varchar(30) not null,
    add_area             varchar(40) not null,
@@ -55,8 +55,8 @@ create table address
 /*==============================================================*/
 create table coupon
 (
-   coupon_id            numeric(8,0) not null,
-   shop_id              numeric(8,0),
+   coupon_id            int not null auto_increment,
+   shop_id              int,
    coupon_youhui        numeric(8,0) not null,
    coupon_list_num      int not null,
    coupon_time_start    datetime not null,
@@ -69,10 +69,10 @@ create table coupon
 /*==============================================================*/
 create table coupon_holding
 (
-   shop_id              numeric(8,0) not null,
-   user_id              numeric(8,0) not null,
-   coupon_id            numeric(8,0) not null,
-   quantity             numeric(8,0),
+   shop_id              int not null,
+   user_id              int not null,
+   coupon_id            int not null,
+   quantity             int,
    closingDate          datetime,
    youhui               numeric(8,0),
    primary key (shop_id, user_id, coupon_id)
@@ -83,9 +83,9 @@ create table coupon_holding
 /*==============================================================*/
 create table goods
 (
-   goods_id             numeric(8,0) not null,
-   shop_id              numeric(8,0),
-   sort_id              numeric(8,0),
+   goods_id             int not null auto_increment, 
+   shop_id              int,
+   sort_id              int,
    goods_name           varchar(50) not null,
    goods_price          numeric(8,0) not null,
    goods_youhui         numeric(8,0) not null,
@@ -98,9 +98,9 @@ create table goods
 /*==============================================================*/
 create table goods_evaluation
 (
-   shop_id              numeric(8,0) not null,
-   goods_id             numeric(8,0) not null,
-   user_id              numeric(8,0) not null,
+   shop_id              int not null,
+   goods_id             int not null,
+   user_id              int not null,
    goods_evaluation_to  varchar(20),
    goods_evaluation_time datetime,
    goods_evaluation_photo varchar(500),
@@ -113,8 +113,8 @@ create table goods_evaluation
 /*==============================================================*/
 create table mj
 (
-   mj_id                numeric(8,0) not null,
-   shop_id              numeric(8,0),
+   mj_id                int not null auto_increment,
+   shop_id              int,
    mj_money             numeric(8,0) not null,
    mj_youhui            numeric(8,0) not null,
    mj_FlagCoupon        bool not null,
@@ -126,7 +126,7 @@ create table mj
 /*==============================================================*/
 create table myuser
 (
-   user_id              numeric(8,0) not null,
+   user_id              int not null auto_increment,
    user_name            varchar(20) not null,
    user_sex             varchar(10) not null,
    user_pwd             varchar(10) not null,
@@ -144,9 +144,9 @@ create table myuser
 /*==============================================================*/
 create table orders
 (
-   order_id             numeric(8,0) not null,
-   goods_id             numeric(8,0),
-   order_sum            numeric(8,0) not null,
+   order_id             int not null auto_increment,
+   goods_id             int,
+   order_sum            int not null,
    order_price          numeric(8,0) not null,
    order_disconut       numeric(8,0),
    primary key (order_id)
@@ -157,9 +157,9 @@ create table orders
 /*==============================================================*/
 create table orders_coupons
 (
-   shop_id              numeric(8,0) not null,
-   user_id              numeric(8,0) not null,
-   coupon_id            numeric(8,0) not null,
+   shop_id              int not null,
+   user_id              int not null,
+   coupon_id            int not null,
    orders_coupons_need  int not null,
    orders_coupons_already int not null,
    primary key (shop_id, user_id, coupon_id)
@@ -170,12 +170,13 @@ create table orders_coupons
 /*==============================================================*/
 create table rider
 (
-   rider_id             numeric(8,0) not null,
+   rider_id             int not null auto_increment,
    rider_name           varchar(20) not null,
    rider_status         varchar(50) not null,
    rider_time           datetime not null,
    rider_phone          varchar(20) not null,
    rider_pwd            varchar(20) not null,
+   rider_city           varchar(20) not null,
    primary key (rider_id)
 );
 
@@ -184,8 +185,8 @@ create table rider
 /*==============================================================*/
 create table rider_entry
 (
-   rider_id             numeric(8,0) not null,
-   add_id               numeric(8,0) not null,
+   rider_id             int not null,
+   add_id               int not null,
    rider_entry_time     datetime,
    rider_entry_evaluation varchar(20),
    rider_entry_income   numeric(8,0),
@@ -197,14 +198,15 @@ create table rider_entry
 /*==============================================================*/
 create table shop
 (
-   shop_id              numeric(8,0) not null,
+   shop_id              int not null auto_increment,
    shop_name            varchar(50) not null,
    shop_star            int,
    shop_perConsume      numeric(8,0),
    shop_total           numeric(8,0),
    shop_count           int,
    shop_phone           varchar(20) not null,
-   ил╪р                   varchar(20) not null,
+   shop_pwd             varchar(20) not null,
+   shop_city            varchar(30) not null,
    primary key (shop_id)
 );
 
@@ -213,13 +215,13 @@ create table shop
 /*==============================================================*/
 create table shop_order
 (
-   coupon_id            numeric(8,0) not null,
-   shop_id              numeric(8,0) not null,
-   mj_id                numeric(8,0) not null,
-   user_id              numeric(8,0) not null,
-   add_id               numeric(8,0) not null,
-   order_id             numeric(8,0) not null,
-   rider_id             numeric(8,0) not null,
+   coupon_id            int not null,
+   shop_id              int not null,
+   mj_id                int not null,
+   user_id              int not null,
+   add_id               int not null,
+   order_id             int not null,
+   rider_id             int not null,
    so_old_money         numeric(8,0) not null,
    so_new_money         numeric(8,0),
    so_order_time        datetime,
@@ -233,7 +235,7 @@ create table shop_order
 /*==============================================================*/
 create table sort
 (
-   sort_id              numeric(8,0) not null,
+   sort_id              int not null auto_increment,
    sort_name            varchar(50) not null,
    primary key (sort_id)
 );
@@ -243,7 +245,7 @@ create table sort
 /*==============================================================*/
 create table staff
 (
-   staff_id             numeric(8,0) not null,
+   staff_id             int not null auto_increment,
    staff_name           varchar(30) not null,
    staff_pwd            varchar(30) not null,
    staff_phone          varchar(20) not null,
