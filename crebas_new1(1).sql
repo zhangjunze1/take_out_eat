@@ -1,38 +1,4 @@
-/*==============================================================*/
-/* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/7/4 14:05:18                            */
-/*==============================================================*/
 
-
-drop table if exists address;
-
-drop table if exists coupon;
-
-drop table if exists coupon_holding;
-
-drop table if exists goods;
-
-drop table if exists goods_evaluation;
-
-drop table if exists mj;
-
-drop table if exists myuser;
-
-drop table if exists orders;
-
-drop table if exists orders_coupons;
-
-drop table if exists rider;
-
-drop table if exists rider_entry;
-
-drop table if exists shop;
-
-drop table if exists shop_order;
-
-drop table if exists sort;
-
-drop table if exists staff;
 
 /*==============================================================*/
 /* Table: address                                               */
@@ -60,7 +26,7 @@ create table coupon
    coupon_youhui        numeric(8,0) not null,
    coupon_list_num      int not null,
    coupon_time_start    datetime not null,
-   coupon_time_finish   datetime,
+   coupon_time_finish   datetime not null,
    primary key (coupon_id)
 );
 
@@ -134,8 +100,8 @@ create table myuser
    user_phone           varchar(20) not null,
    user_email           varchar(30) not null,
    user_city            varchar(30) not null,
-   user_rigister_time   datetime not null,
-   user_VIP             bool not null,
+   user_rigister_time   datetime,
+   user_VIP             bool,
    user_VIP_time        datetime,
    primary key (user_id)
 );
@@ -174,6 +140,8 @@ create table rider
    rider_name           varchar(20) not null,
    rider_status         varchar(50) not null,
    rider_time           datetime not null,
+   rider_phone          varchar(20) not null,
+   rider_pwd            varchar(20) not null,
    primary key (rider_id)
 );
 
@@ -197,10 +165,12 @@ create table shop
 (
    shop_id              numeric(8,0) not null,
    shop_name            varchar(50) not null,
-   shop_star            int not null,
-   shop_perConsume      numeric(8,0) not null,
-   shop_total           numeric(8,0) not null,
-   shop_count           int not null,
+   shop_star            int,
+   shop_perConsume      numeric(8,0),
+   shop_total           numeric(8,0),
+   shop_count           int,
+   shop_phone           varchar(20) not null,
+   ил╪р                   varchar(20) not null,
    primary key (shop_id)
 );
 
